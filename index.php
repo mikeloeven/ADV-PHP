@@ -10,8 +10,6 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <?php
-        // put your code here
-        ?>
+         <a href ="Week1Demo With Lab/addPhoneType.php">Week 1 Demo AddPhoneType</a>
     </body>
 </html>
