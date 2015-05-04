@@ -1,4 +1,5 @@
 <?php namespace lab2;
+use pdo;
 
 /**
  * DB is the general class to connection to our database

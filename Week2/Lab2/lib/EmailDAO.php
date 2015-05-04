@@ -11,9 +11,9 @@ class EmailDAO implements IDAO{
     
     private $DB = null;
     
-    public function __construct(PDO $DB) 
+    public function __construct(PDO $db) 
     {
-        $this->setDB($DB);
+        $this->setDB($db);
     }
     
     private function setDB(PDO $DB)
@@ -76,13 +76,12 @@ class EmailDAO implements IDAO{
             $stmt = $db->prepare("INSERT INTO email SET email = :email, emailtypeid = :emailtypeid, active = :active, logged = now(), lastupdated = now()");
         }
         
-        if ($stmt->excecute($values) && $stmt->rowCount() > 0 )
+        if ($stmt->execute($values) && $stmt->rowCount() > 0 )
         {
             return true;
         }
         
         return false;
-        
     }
     
     public function delete($id)
@@ -104,8 +103,7 @@ class EmailDAO implements IDAO{
         $db = $this->getDB();
         $stmt = $db->prepare("SELECT email.emailid, email.email, emailtype.emailtypeid, emailtype.emailtype, emailtype.active, email.logged, email.lastupdated, email.active"
                 . "FROM email LEFT JOIN emailtype on email.emailtypeid = emailtype.emailtypeid");
-        
-        if ($stmt->execute() && $stmt->rowCount() > 0)
+        if ( $stmt->execute() && $stmt->rowCount() > 0)
         {
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
