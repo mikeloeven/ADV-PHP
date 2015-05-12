@@ -1,4 +1,4 @@
-<?php namespace lab2;
+<?php namespace lab2; 
 use PDO;
 
 /* 
@@ -11,14 +11,14 @@ class EmailDAO implements IDAO{
     
     private $DB = null;
     
-    public function __construct(PDO $db) 
+    public function __construct( PDO $db ) 
     {
         $this->setDB($db);
     }
     
-    private function setDB(PDO $DB)
+    private function setDB( PDO $db )
     {
-        $this->DB = $DB;
+        $this->DB = $db;
     }
     
     private function getDB()
@@ -37,6 +37,7 @@ class EmailDAO implements IDAO{
         }
         return false;
     }
+    
     
     public function getById($id)
     {
@@ -71,6 +72,7 @@ class EmailDAO implements IDAO{
             $values[":emailid"] = $model->getEmailid();
             $stmt = $db->prepare("UPDATE email set email = :email, emailtypeid = :emailtypeid, active = :active, lastupdated = now() WHERE emailid = :emailid");
         }
+            
         else
         {
             $stmt = $db->prepare("INSERT INTO email SET email = :email, emailtypeid = :emailtypeid, active = :active, logged = now(), lastupdated = now()");
@@ -97,12 +99,14 @@ class EmailDAO implements IDAO{
         return false;
     }
     
+    
     public function getAllRows()
     {
+       
         $values = array();
         $db = $this->getDB();
-        $stmt = $db->prepare("SELECT email.emailid, email.email, emailtype.emailtypeid, emailtype.emailtype, emailtype.active, email.logged, email.lastupdated, email.active"
-                . "FROM email LEFT JOIN emailtype on email.emailtypeid = emailtype.emailtypeid");
+        $stmt = $db->prepare("SELECT email.emailid, email.email, email.emailtypeid, emailtype.emailtype ,email.lastupdated, email.logged FROM email LEFT JOIN emailtype ON email.emailtypeid = emailtype.emailtypeid");
+        
         if ( $stmt->execute() && $stmt->rowCount() > 0)
         {
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -115,6 +119,7 @@ class EmailDAO implements IDAO{
                 
             }
         }
+    
         
         $stmt->closeCursor();
         return $values;

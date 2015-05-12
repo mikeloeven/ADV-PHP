@@ -6,7 +6,7 @@
         <title></title>
     </head>
     <body>
-        <?php 
+        <?php
         $dbConfig = array(
             "DB_DNS"=>'mysql:host=localhost;port=3306;dbname=PHPadvClassSpring2015',
             "DB_USER"=>'root',
@@ -14,23 +14,26 @@
         );
         
         $pdo = new DB($dbConfig);
-        $db = $pdo->getDB();
+        $db = $pdo->getDB(); 
         
         
         $email = filter_input(INPUT_POST, 'email');
         $emailTypeid = filter_input(INPUT_POST, 'emailtypeid');
         $active = filter_input(INPUT_POST, 'active');
+  
         
-        
-        // $emailDAO = new EmailDAO($db);
          $emailDAO = new EmailDAO($db);
+         $emailTypeDAO = new EmailTypeDAO($db);
          
-         $emailTypes = $emailDAO->getAllRows();
-        
+         $emailTypes = $emailTypeDAO->getAllRows();
+         
          $util = new Util();
          
           if ( $util->isPostRequest() ) {
-                            
+              var_dump($email);
+              var_dump($emailTypeid);
+              var_dump($active);
+              echo "<p />";
                $validator = new Validator(); 
                 $errors = array();
                 if( !$validator->emailIsValid($email) ) {
@@ -53,18 +56,21 @@
                     }
                 } else {
                     
-                    
-                    $emailModel = new EmailModel();
-                    
+                    var_dump(filter_input_array(INPUT_POST));
+                    $emailModel = new EmailModel();                    
                     $emailModel->map(filter_input_array(INPUT_POST));
-                    
-                   // var_dump($emailtypeModel);
+                    echo "<p /";
+                    var_dump($emailModel);
+                    echo "<p />";
+                    var_dump(filter_input_array(INPUT_POST));
+                    //var_dump($emailModel);
                     if ( $emailDAO->save($emailModel) ) {
                         echo 'Email Added';
                     } else {
                         echo 'Email not added';
                     }
-                    
+                echo "<p />";
+                var_dump($errors);
                 }
           }
         
@@ -80,14 +86,14 @@
             <input type="number" max="1" min="0" name="active" value="<?php echo $active; ?>" />
             
             <br /><br />
-            <label>Email Type:</label>
+            <label>Email Type:</label>           
             <select name="emailtypeid">
-            <?php 
+            <?php                
                 foreach ($emailTypes as $value) {
-                    if ( $value->getEmailtypeid() == $emailTypeid ) {
-                        echo '<option value="',$value->getEmailtypeid(),'" selected="selected">',$value->getEmailtype(),'</option>';  
+                    if ( $value->getEmailTypeid() == $emailTypeid ) {                        
+                        echo '<option value="',$value->getEmailTypeId(),'" selected="selected">',$value->getEmailType(),'</option>';  
                     } else {
-                        echo '<option value="',$value->getEmailtypeid(),'">',$value->getEmailtype(),'</option>';
+                        echo '<option value="',$value->getEmailTypeId(),'">',$value->getEmailType(),'</option>';
                     }
                 }
             ?>
@@ -108,7 +114,7 @@
          <?php 
             $emails = $emailDAO->getAllRows(); 
             foreach ($emails as $value) {
-                echo '<tr><td>',$value->getEmail(),'</td><td>',$value->getEmailtype(),'</td><td>',date("F j, Y g:i(s) a", strtotime($value->getLastupdated())),'</td><td>',date("F j, Y g:i(s) a", strtotime($value->getLogged())),'</td>';
+                echo '<tr><td>',$value->getEmail(),'</td><td>',$value->getEmailType(),'</td><td>',date("F j, Y g:i(s) a", strtotime($value->getLastupdated())),'</td><td>',date("F j, Y g:i(s) a", strtotime($value->getLogged())),'</td>';
                 echo  '<td>', ( $value->getActive() == 1 ? 'Yes' : 'No') ,'</td></tr>' ;
             }
 

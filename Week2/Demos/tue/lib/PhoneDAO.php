@@ -23,8 +23,8 @@ class PhoneDAO implements IDAO {
         $this->setDB($db);    
     }
     
-    private function setDB( PDO $DB) {        
-        $this->DB = $DB;
+    private function setDB( PDO $db) {        
+        $this->DB = $db;
     }
     
     private function getDB() {
