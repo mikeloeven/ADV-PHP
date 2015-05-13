@@ -38,6 +38,22 @@ class EmailDAO implements IDAO{
         return false;
     }
     
+    public function emailExist($email, EmailModel $model)
+    {
+        $db = $this->getDB();
+        $stmt = $db->prepare("SELECT emailid FROM email WHERE email= :email");
+        if($stmt->execute(array(':email' => $email)) && $stmt->rowCount() > 0)
+        {
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            var_dump($result);
+            $value = $result[0];
+            var_dump($value);
+            $model->setEmailId($value['emailid']);
+        }
+        return null;
+    }
+    
+    
     
     public function getById($id)
     {

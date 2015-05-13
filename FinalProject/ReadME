@@ -1,0 +1,22 @@
+My final project will be to create a simple message board application. 
+
+Guests will be able to login or register a new account. 
+Registered Users will be able to create new posts edit existing posts and delete their own posts
+Administrator users will be able to delete any users posts.
+
+tasks 
+
+Design Database Tables for Users Forums and Posts :2-3 hours
+Implement Session manager and user roles :2-3 hours
+Design DAO objects for all tables. :10-15 Hours
+Implement Model Objects for all tables :3-5 Hours
+Design layout of the forum site. :10-15 Hours:
+Implement Login Page :1-2 Hours
+Implement page to display all forums :1-2 Hours
+Implement Page to display all posts from selected forum :2-5 Hours
+Implement Page to add new post :2-5 Hours
+Implement page for editing posts with session checking :2-5 Hours
+Implement Page to delete selected post with Session check :2-5 Hours
+
+ 
+

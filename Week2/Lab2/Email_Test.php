@@ -30,9 +30,6 @@
          $util = new Util();
          
           if ( $util->isPostRequest() ) {
-              var_dump($email);
-              var_dump($emailTypeid);
-              var_dump($active);
               echo "<p />";
                $validator = new Validator(); 
                 $errors = array();
@@ -46,23 +43,19 @@
                 
                 if ( empty($emailTypeid) ) {
                      $errors[] = 'Email type is invalid';
-                }
-                
-                
+                }     
                 
                 if ( count($errors) > 0 ) {
                     foreach ($errors as $value) {
                         echo '<p>',$value,'</p>';
                     }
-                } else {
+                }
+                
+                else
+                {
                     
-                    var_dump(filter_input_array(INPUT_POST));
                     $emailModel = new EmailModel();                    
                     $emailModel->map(filter_input_array(INPUT_POST));
-                    echo "<p /";
-                    var_dump($emailModel);
-                    echo "<p />";
-                    var_dump(filter_input_array(INPUT_POST));
                     //var_dump($emailModel);
                     if ( $emailDAO->save($emailModel) ) {
                         echo 'Email Added';
@@ -79,7 +72,7 @@
         
          <h3>Add email</h3>
         <form action="#" method="post">
-            <label>Email:</label>            
+            <label>Email:</label>
             <input type="text" name="email" value="<?php echo $email; ?>" placeholder="" />
             <br /><br />
             <label>Active:</label>
@@ -115,7 +108,7 @@
             $emails = $emailDAO->getAllRows(); 
             foreach ($emails as $value) {
                 echo '<tr><td>',$value->getEmail(),'</td><td>',$value->getEmailType(),'</td><td>',date("F j, Y g:i(s) a", strtotime($value->getLastupdated())),'</td><td>',date("F j, Y g:i(s) a", strtotime($value->getLogged())),'</td>';
-                echo  '<td>', ( $value->getActive() == 1 ? 'Yes' : 'No') ,'</td></tr>' ;
+                echo  '<td>', ( $value->getActive() == 1 ? 'Yes' : 'No') ,'</td><td><a href=update.php?eId=',$value->getEmailId(),'>Update</a></td></tr>' ;
             }
 
          ?>
