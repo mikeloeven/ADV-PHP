@@ -45,9 +45,7 @@ class EmailDAO implements IDAO{
         if($stmt->execute(array(':email' => $email)) && $stmt->rowCount() > 0)
         {
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
-            var_dump($result);
             $value = $result[0];
-            var_dump($value);
             $model->setEmailId($value['emailid']);
         }
         return null;
@@ -60,9 +58,8 @@ class EmailDAO implements IDAO{
         $model = new emailModel();
         $db = $this->getDB();
         
-        $stmt = $db->prepare("SELECT email.emailid, email.email, emailtype.emailtypeid, emailtype.emailtype, emailtype.active, email.logged, email.lastupdated, email.active"
-                . "FROM email LEFT JOIN emailtype on email.emailtypeid = emailtype.emailtypeid WHERE email.emailid = :emailid");
-    
+        $stmt = $db->prepare("SELECT email.emailid, email.email, emailtype.emailtypeid, emailtype.emailtype, emailtype.active, email.logged, email.lastupdated, email.active FROM email LEFT JOIN emailtype on email.emailtypeid = emailtype.emailtypeid "
+                ."WHERE email.emailid = :emailid");
         if ( $stmt->execute(array(':emailid' => $id)) && $stmt->rowCount() > 0)
         {
             $results = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -121,7 +118,7 @@ class EmailDAO implements IDAO{
        
         $values = array();
         $db = $this->getDB();
-        $stmt = $db->prepare("SELECT email.emailid, email.email, email.emailtypeid, emailtype.emailtype ,email.lastupdated, email.logged FROM email LEFT JOIN emailtype ON email.emailtypeid = emailtype.emailtypeid");
+        $stmt = $db->prepare("SELECT email.emailid, email.email, email.emailtypeid, emailtype.emailtype ,email.lastupdated, email.logged, email.active FROM email LEFT JOIN emailtype ON email.emailtypeid = emailtype.emailtypeid");
         
         if ( $stmt->execute() && $stmt->rowCount() > 0)
         {

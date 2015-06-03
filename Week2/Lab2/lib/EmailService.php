@@ -1,12 +1,11 @@
-<?php namespace lab2;
-include PDO;
+<?php namespace lab2; use PDO;
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-class EmailTypeService
+class EmailService
 {
     
     private $_errors = array();
@@ -16,7 +15,7 @@ class EmailTypeService
     private $_EmailDAO;
     private $_EmailModel;
 
-    private function __construct($db, $util, $validator, $emailDAO, $emailModel)
+    public function __construct($db, $util, $validator, $emailDAO, $emailModel)
     {
         $this->_DB = $db;
         $this->_Util = $util;
@@ -42,11 +41,11 @@ class EmailTypeService
         {
             if($this->_EmailDAO->save($this->_EmailModel))
             {
-                echo 'Email Added/Updated';
+                return true;
             }
             else 
             {
-                echo 'Email could not be added';
+                return false;
             }
         }
     }
@@ -56,14 +55,11 @@ class EmailTypeService
         if ($this->_Util->isPostRequest())
         {
             $this->_errors = array();
-            if (!$this->_Validator->emailTypeIsValid($this->_EmailModel->getEmailType()))
+            if (!$this->_Validator->emailIsValid($this->_EmailModel->getEmail()))
             {
-                $this->_errors[] = 'Email Type Is Invalid';
+                $this->_errors[] = 'Email Is Invalid';
             }
-            if (!$this->_Validator->activeIsValid($this->_emailTypeModel->getActive()))
-            {
-                $this->_errors[] = 'Active Is Invalid';
-            }
+
         }
     }
     

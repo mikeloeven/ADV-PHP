@@ -20,18 +20,30 @@
             $pdo = new DB($dbConfig);
             $db = $pdo->getDB();
             
-            if (isset($_GET['emailtypeid']))
+            $EID=filter_input(INPUT_POST,"EID");
+            
+            if(isset($EID))
             {
-                
+                $emailDAO = new EmailDAO($db);
+                if ($emailDAO ->delete($EID))
+                {
+                    Echo '<h1>Email Deleted Successfully</h1><h3>You will be returned to the menu shortly, Click the button if nothing happens</h3><form method="link" action ="Email_Test.php"><input type="submit" value="Return"/></form>';
+                 
+     
+                }
+                else 
+                {
+                    Echo '<h1>Email Could not Be Deleted</h1><h3>You will be returned to the menu shortly, Click the button if nothing happens</h3><form method="link" action ="Email_Test.php"><input type="submit" value="Return"/></form>';
+   
+                    
+                }
+        
+                header("refresh:5; url=Email_Test.php");
+                        
             }
-            else if (isset($_GET['emailid']))
-            {
-                
-            }
-            else
-            {
-                
-            }
+            
+            
+            
 
             
             

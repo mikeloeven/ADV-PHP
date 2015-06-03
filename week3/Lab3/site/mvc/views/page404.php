@@ -5,11 +5,9 @@
         <title></title>
     </head>
     <body>
-        <?php
-        // put your code here
-        
-            phpinfo();
-        
-        ?>
+         <h1>404</h1>
+         <?php
+            echo $scope->view['error'];
+         ?>
     </body>
 </html>

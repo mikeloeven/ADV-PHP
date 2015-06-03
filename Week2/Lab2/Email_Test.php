@@ -7,6 +7,8 @@
     </head>
     <body>
         <?php
+        
+      
         $dbConfig = array(
             "DB_DNS"=>'mysql:host=localhost;port=3306;dbname=PHPadvClassSpring2015',
             "DB_USER"=>'root',
@@ -105,10 +107,10 @@
                     <th>Active</th>
                 </tr>
          <?php 
-            $emails = $emailDAO->getAllRows(); 
+            $emails = $emailDAO->getAllRows();
             foreach ($emails as $value) {
                 echo '<tr><td>',$value->getEmail(),'</td><td>',$value->getEmailType(),'</td><td>',date("F j, Y g:i(s) a", strtotime($value->getLastupdated())),'</td><td>',date("F j, Y g:i(s) a", strtotime($value->getLogged())),'</td>';
-                echo  '<td>', ( $value->getActive() == 1 ? 'Yes' : 'No') ,'</td><td><a href=update.php?eId=',$value->getEmailId(),'>Update</a></td></tr>' ;
+                echo  '<td>', ( $value->getActive() == 1 ? 'Yes' : 'No') ,'</td><td><form action="Email_Update.php" method="POST"><input type="hidden" name="EID" value="',$value->getEmailId(),'"/><input type="submit" value="Update"/></form></td><td><form action="Email_Delete.php" method="POST"><input type="hidden" name="EID" value="',$value->getEmailId(),'"/><input type="submit" value="Delete"/></form></td></tr>' ;
             }
 
          ?>

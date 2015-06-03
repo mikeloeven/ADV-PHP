@@ -144,4 +144,11 @@ class EmailModel implements IModel
         return $this;
     }
     
+    public function dumpAll()
+    {
+        $values = array("emailId" => $this->emailid, "email" => $this->email, "emailType" => $this->emailtype, "emailTypeId" => $this->emailtypeid, "logged" => $this->logged, "lastUpdated" => $this->lastupdated, "active" => $this->active);
+        return $values;
+       
+    }
+    
 }
