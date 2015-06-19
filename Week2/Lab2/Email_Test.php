@@ -97,9 +97,11 @@
              <br /><br />
             <input type="submit" value="Submit" />
         </form>
-         
+        <p />
+        <h3>List email</h3>
             <table border="1" cellpadding="5">
                 <tr>
+                    <th>ID</th>
                     <th>Email</th>
                     <th>Email Type</th>
                     <th>Last updated</th>
@@ -109,11 +111,22 @@
          <?php 
             $emails = $emailDAO->getAllRows();
             foreach ($emails as $value) {
-                echo '<tr><td>',$value->getEmail(),'</td><td>',$value->getEmailType(),'</td><td>',date("F j, Y g:i(s) a", strtotime($value->getLastupdated())),'</td><td>',date("F j, Y g:i(s) a", strtotime($value->getLogged())),'</td>';
-                echo  '<td>', ( $value->getActive() == 1 ? 'Yes' : 'No') ,'</td><td><form action="Email_Update.php" method="POST"><input type="hidden" name="EID" value="',$value->getEmailId(),'"/><input type="submit" value="Update"/></form></td><td><form action="Email_Delete.php" method="POST"><input type="hidden" name="EID" value="',$value->getEmailId(),'"/><input type="submit" value="Delete"/></form></td></tr>' ;
+                echo '<tr><td>',$value->getEmailId(),'</td>','<td>',$value->getEmail(),'</td><td>',$value->getEmailType(),'</td><td>',date("F j, Y g:i(s) a", strtotime($value->getLastupdated())),'</td><td>',date("F j, Y g:i(s) a", strtotime($value->getLogged())),'</td>';
+                echo  '<td>', ( $value->getActive() == 1 ? 'Yes' : 'No'),
+                    '<td><form action = "Email_Update.php" method="POST"><input type="hidden" name="EID" value="',$value->getEmailId(),'"/><input type="submit" value="Update"/></form></td>',
+                    '</td><td><form action="Email_Delete.php" method="POST"><input type="hidden" name="EID" value="',$value->getEmailId(),'"/><input type="submit" value="Delete"/></form></td></tr>';
             }
+            echo '</table>'
 
          ?>
+                
+        <p />
+        <h3>Update email</h3>
+        <p />
+        <form action ="Email_Update.php" method="POST">
+            <span>ID: <input type="text" name="EID" value=""/><span>
+            <input type="submit" value="Lookup"/>
+        </form>
             </table>
     </body>
 </html>

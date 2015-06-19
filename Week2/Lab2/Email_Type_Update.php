@@ -33,11 +33,6 @@
                 $_SESSION['EID'] = filter_input(INPUT_POST, "EID");   
                 $emailId = $_SESSION['EID'];
                 $emailModel = $emailDAO->getById($emailId);
-                if (!$emailDAO->idExist($emailModel->getEmailId()))
-                {
-                    echo '<h1>This Email ID Does Not Exist</h1>';
-                    header("refresh:3; url=Email_Test.php");
-                }
                 
             }
 
@@ -51,7 +46,6 @@
             {
                 $emailModel->map(filter_input_array(INPUT_POST));
                 $emailModel->setEmailId($_SESSION['EID']);
-                
             }          
         } 
            
@@ -78,7 +72,6 @@
                     Echo "<h3>Email Not Updated</h3>";
                 }
             }
-            
         }
         
         
@@ -108,9 +101,9 @@
             </select>
             
              <br /><br />
-            <input type="submit" value="Update" />
+            <input type="submit" value="Submit" />
             </form>
-            <form action ="#" method="post"><input type="hidden" name ="BACK" value="true"/> <input type="submit" value ="Back" /> </form>
+            <form action ="#" method="post"><input type="hidden" name ="BACK" value="true"/> <input type="submit" value ="back" /> </form>
             
          
  
