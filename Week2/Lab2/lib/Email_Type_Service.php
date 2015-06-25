@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-class EmailService
+class EmailTypeService
 {
     
     private $_errors = array();
@@ -15,13 +15,13 @@ class EmailService
     private $_EmailDAO;
     private $_EmailModel;
 
-    public function __construct($db, $util, $validator, $emailDAO, $emailModel)
+    public function __construct($db, $util, $validator, $emailTypeDAO, $emailTypeModel)
     {
         $this->_DB = $db;
         $this->_Util = $util;
         $this->_Validator = $validator;
-        $this->_EmailDAO = $emailDAO;
-        $this->_EmailModel = $emailModel;
+        $this->_EmailDAO = $emailTypeDAO;
+        $this->_EmailModel = $emailTypeModel;
     }
     
     public function saveForm()

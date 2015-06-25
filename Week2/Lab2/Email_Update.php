@@ -85,7 +85,7 @@
         ?>
         
         
-        <h3>Add email</h3>
+        <h3>Update email</h3>
         <form action="#" method="post">
             <label>Email:</label>
             <input type="text" name="email" value="<?php echo $email; ?>" placeholder="" />

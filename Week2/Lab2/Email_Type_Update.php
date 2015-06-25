@@ -21,7 +21,8 @@
         $validator = new Validator();
         $emailDAO = new EmailDAO($db);
         $emailTypeDAO = new EmailTypeDAO($db);
-        $emailModel = new EmailModel();
+        $emailTypeModel = new EmailTypeModel($db);
+       
        
          
         if ( $util->isPostRequest() ) {
@@ -32,7 +33,7 @@
             {             
                 $_SESSION['EID'] = filter_input(INPUT_POST, "EID");   
                 $emailId = $_SESSION['EID'];
-                $emailModel = $emailDAO->getById($emailId);
+                $emailTypeModel = $emailDAO->getById($emailId);
                 
             }
 
@@ -44,25 +45,26 @@
             }
             else if (isset($_SESSION['EID']))
             {
-                $emailModel->map(filter_input_array(INPUT_POST));
-                $emailModel->setEmailId($_SESSION['EID']);
+                $emailTypeModel->map(filter_input_array(INPUT_POST));
+                $emailTypeModel->setEmailId($_SESSION['EID']);
             }          
         } 
            
         
         
         
-        $emailtypeid = $emailModel->getEmailtypeid();
-        $email = $emailModel->getEmail();
-        $active = $emailModel->getActive();  
+        $emailtypeid = $emailTypeModel->getEmailTypeId();
+        $emailtype = $emailTypeModel->getEmailType();
+        $active = $emailTypeModel->getActive();  
         $emailTypes = $emailTypeDAO->getAllRows();
+        
               
         
-        $emailService = new EmailService($db, $util, $validator, $emailDAO, $emailModel);
+        $emailService = new EmailService($db, $util, $validator, $emailDAO, $emailTypeModel);
         
         if (isset($_POST["email"]))
         {
-            if ( $emailDAO->idExist($emailModel->getEmailId())) {
+            if ( $emailDAO->idExist($emailTypeModel->getEmailId())) {
                 if($emailService->saveForm())
                 {
                     Echo "<h3>Email Updated Successfully</h3>";
@@ -78,30 +80,16 @@
         ?>
         
         
-        <h3>Add email</h3>
+        <h3>Update email Type</h3>
         <form action="#" method="post">
-            <label>Email:</label>
-            <input type="text" name="email" value="<?php echo $email; ?>" placeholder="" />
+            <label>Email Type:</label>
+            <input type="text" name="emailType" value="<?php echo $emailtype; ?>" placeholder="" />
             <br /><br />
             <label>Active:</label>
             <input type="number" max="1" min="0" name="active" value="<?php echo $active; ?>" />
-            
+             
             <br /><br />
-            <label>Email Type:</label>           
-            <select name="emailtypeid">
-            <?php                
-                foreach ($emailTypes as $value) {
-                    if ( $value->getEmailTypeid() == $emailModel->getEmailTypeId() ) {                        
-                        echo '<option value="',$value->getEmailTypeId(),'" selected="selected">',$value->getEmailType(),'</option>';  
-                    } else {
-                        echo '<option value="',$value->getEmailTypeId(),'">',$value->getEmailType(),'</option>';
-                    }
-                }
-            ?>
-            </select>
-            
-             <br /><br />
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Update" />
             </form>
             <form action ="#" method="post"><input type="hidden" name ="BACK" value="true"/> <input type="submit" value ="back" /> </form>
             

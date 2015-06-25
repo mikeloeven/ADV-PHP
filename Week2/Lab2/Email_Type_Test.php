@@ -67,7 +67,7 @@
         }
         ?>
            
-        <h3>Add Email Type</h3>
+        <h3>Email Types</h3>
         <form action="#" method ="post">
             <label>Email Type:</label>
             <input type="hidden" name="unused" />
@@ -89,7 +89,7 @@
                 $emailTypes = $emailTypeDAO->getAllRows();
                 foreach ($emailTypes as $value)
                 {
-                    echo '<tr><td>',$value->getEmailtype(),'</td><td>',$value->getActive(),'</td></tr>';
+                    echo '<tr><td >',$value->getEmailtype(),'</td><td>',$value->getActive(),'</td></tr>';
                 }
             
             ?>
