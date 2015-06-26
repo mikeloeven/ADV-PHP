@@ -111,7 +111,6 @@ class EmailTypeService
         if ($this->_Util->isPostRequest())
         {
             $this->_errors = array();
-            var_dump($this->_EmailTypeModel->getEmailType());
             if (!$this->_Validator->emailTypeIsValid($this->_EmailTypeModel->getEmailType()))
             {
                 $this->_errors[] = 'Email Type Is Invalid';
