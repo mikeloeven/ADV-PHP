@@ -10,6 +10,8 @@ use pdo;
 
 class DB {
     
+    
+    
     protected $db = null;
     private $dbConfig = array();
    
@@ -60,5 +62,5 @@ class DB {
         $this->db = null;        
     }
     
-    
+      
 }

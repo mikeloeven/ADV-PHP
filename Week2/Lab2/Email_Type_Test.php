@@ -8,14 +8,7 @@
     <body>
         <?php
         
-      
-        $dbConfig = array(
-            "DB_DNS"=>'mysql:host=localhost;port=3306;dbname=PHPadvClassSpring2015',
-            "DB_USER"=>'root',
-            "DB_PASSWORD"=>'testpass1234'
-        );
-        
-        $pdo = new DB($dbConfig);
+        $pdo = new DB(DBconfig::DBC);
         $db = $pdo->getDB(); 
         
         $emailType = filter_input(INPUT_POST, 'emailtype');
@@ -67,7 +60,7 @@
         }
         ?>
            
-        <h3>Email Types</h3>
+        <h3>Add Email Types</h3>
         <form action="#" method ="post">
             <label>Email Type:</label>
             <input type="hidden" name="unused" />

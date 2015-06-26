@@ -10,14 +10,8 @@
     
     <body>
         <?php
-            $dbConfig = array
-            (
-                    "DB_DNS"=>'mysql:host=localhost;port=3306;dbname=PHPadvClassSpring2015',
-                    "DB_USER"=>'root',
-                    "DB_PASSWORD"=>'testpass1234'
-            );
             
-            $pdo = new DB($dbConfig);
+            $pdo = new DB(DBConfig::DBC);
             $db = $pdo->getDB();
             
             $EID=filter_input(INPUT_POST,"EID");
