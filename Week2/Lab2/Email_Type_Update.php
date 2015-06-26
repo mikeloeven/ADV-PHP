@@ -28,7 +28,7 @@
                 $emailTypeModel = $emailTypeDAO->getById($emailTypeId);
                 if (!$emailTypeDAO->idExist($emailTypeModel->getEmailTypeId()))
                 {
-                    echo '<h1>This Email ID Does Not Exist</h1>';
+                    echo '<h1>This TypeID Does Not Exist</h1>';
                     header("refresh:3; url=Email_Test.php");
                 }
                 

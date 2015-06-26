@@ -111,7 +111,7 @@
             echo '</table>'
 
          ?>
-                
+        </table>  
         <p />
         <h3>Update email</h3>
         <p />
@@ -119,6 +119,8 @@
             <span>ID: <input type="text" name="EID" value=""/><span>
             <input type="submit" value="Lookup"/>
         </form>
-            </table>
+        <br /><br />
+        <form action='index.php' method='link'><input type='submit' value='Return To Index'></form>
+        
     </body>
 </html>

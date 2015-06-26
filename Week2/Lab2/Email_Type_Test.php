@@ -70,26 +70,38 @@
             <input type="number" max="1" min="0" name="active" value="<?php echo $active;?>" />
             <br /><br />
             <input type="submit" value="Submit" />
+            <br /><br />
         </form>
-            
+        <h3>List Email Types</h3>
             <table border="1" cellpadding="5";>
                 <tr>    
                     <th>Email Type</th>
-                    <th>Active</th>                   
+                    <th>Active</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             <?php 
                 
                 $emailTypes = $emailTypeDAO->getAllRows();
                 foreach ($emailTypes as $value)
                 {
-                    echo '<tr><td >',$value->getEmailtype(),'</td><td>',$value->getActive(),'</td>'
+                    echo '<tr><td>',$value->getEmailtype(),'</td><td>',$value->getActive(),'</td>'
                             . '<td><form action="Email_Type_Update.php" method="post"><input type="hidden" name="TID" value="',$value->getEmailtypeid(),'"/><input type="submit" value="Update"/></form></td>'
                             . '<td><form action="Email_Type_Delete.php" method="post"><input type="hidden" name="TID" value="',$value->getEmailtypeid(),'"/><input type="submit" value="Delete"/></form></td></tr>';
                 }
             
             ?>
+            </table>
+        <br /><br />
+        <h3>Update Email Type</h3>
+        <form action="Email_Type_Update.php" method="post">
+            <span><label>TypeID:</label><input type="text" name="TID" value=""/><input type="submit" value="Update"/></span>
+        </form>
+        <br /><br />
+        <form action='index.php' method='link'><input type='submit' value='Return To Index'></form>
 
-                <form action="Email_Type_Update.php" method="post"><input type="hidden" name="TID" value=""/><input type="submit" value="Update"/></form>
+
+
 
                    
         
