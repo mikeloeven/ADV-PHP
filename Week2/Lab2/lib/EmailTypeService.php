@@ -12,16 +12,16 @@ class EmailTypeService
     private $_Util;
     private $_DB;
     private $_Validator;
-    private $_EmailDAO;
-    private $_EmailModel;
+    private $_EmailTypeDAO;
+    private $_EmailTypeModel;
 
     public function __construct($db, $util, $validator, $emailTypeDAO, $emailTypeModel)
     {
         $this->_DB = $db;
         $this->_Util = $util;
         $this->_Validator = $validator;
-        $this->_EmailDAO = $emailTypeDAO;
-        $this->_EmailModel = $emailTypeModel;
+        $this->_EmailTypeDAO = $emailTypeDAO;
+        $this->_EmailTypeModel = $emailTypeModel;
     }
     
     public function saveForm()
@@ -39,7 +39,7 @@ class EmailTypeService
         }
         else 
         {
-            if($this->_EmailDAO->save($this->_EmailModel))
+            if($this->_EmailTypeDAO->save($this->_EmailTypeModel))
             {
                 return true;
             }
@@ -47,19 +47,6 @@ class EmailTypeService
             {
                 return false;
             }
-        }
-    }
-    
-    public function validateForm() 
-    {
-        if ($this->_Util->isPostRequest())
-        {
-            $this->_errors = array();
-            if (!$this->_Validator->emailIsValid($this->_EmailModel->getEmail()))
-            {
-                $this->_errors[] = 'Email Is Invalid';
-            }
-
         }
     }
     
@@ -76,9 +63,9 @@ class EmailTypeService
         return (count($this->_errors)>0);
     }
     
-    public function displayEmails()
+    public function displayEmailTypes()
     {
-        $stmt = $this->_DB->prepare("SELECT * FROM email");
+        $stmt = $this->_DB->prepare("SELECT * FROM emailtype");
         
         if ($stmt->execute() && $stmt->rowCount()>0)
         {
@@ -86,7 +73,7 @@ class EmailTypeService
             
             foreach ($results as $value)
             {
-                echo '<p>', $value['email'], '</p>';
+                echo '<p>', $value['emailtype'], '</p>';
             }
         }
             else 
@@ -98,16 +85,16 @@ class EmailTypeService
     
     public function displayEmailActions()
     {
-        $Emails = $this->_EmailDAO->getAllRows();
+        $Emails = $this->_EmailTypeDAO->getAllRows();
         
-        if (count($emails)<0)
+        if (count($emailtypes)<0)
         {
             echo '<p>No Data</p>';
         }
         else 
         {
             echo '<table border="1" cellpadding = "5"><tr><th>Email ID</th><th>Email</th><th>Email Type</th><th>Active</th><th>Last Updated</th></tr>;';
-            foreach ($emails as $value)
+            foreach ($emailtypes as $value)
             {
                 echo '<tr>';
                 echo '<td>', $value->getEmailId(),'</td>';
@@ -117,6 +104,19 @@ class EmailTypeService
                 echo '<tr>';
             }
             echo '</table>';
+        }
+    }
+    
+    public function validateForm(){
+        if ($this->_Util->isPostRequest())
+        {
+            $this->_errors = array();
+            var_dump($this->_EmailTypeModel->getEmailType());
+            if (!$this->_Validator->emailTypeIsValid($this->_EmailTypeModel->getEmailType()))
+            {
+                $this->_errors[] = 'Email Type Is Invalid';
+            }
+
         }
     }
     

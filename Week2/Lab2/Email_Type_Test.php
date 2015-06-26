@@ -82,17 +82,21 @@
             <table border="1" cellpadding="5";>
                 <tr>    
                     <th>Email Type</th>
-                    <th>Active</th>
+                    <th>Active</th>                   
                 </tr>
             <?php 
                 
                 $emailTypes = $emailTypeDAO->getAllRows();
                 foreach ($emailTypes as $value)
                 {
-                    echo '<tr><td >',$value->getEmailtype(),'</td><td>',$value->getActive(),'</td></tr>';
+                    echo '<tr><td >',$value->getEmailtype(),'</td><td>',$value->getActive(),'</td>'
+                            . '<td><form action="Email_Type_Update.php" method="post"><input type="hidden" name="TID" value="',$value->getEmailtypeid(),'"/><input type="submit" value="Update"/></form></td>'
+                            . '<td><form action="Email_Type_Delete.php" method="post"><input type="hidden" name="TID" value="',$value->getEmailtypeid(),'"/><input type="submit" value="Delete"/></form></td></tr>';
                 }
             
             ?>
+
+                <form action="Email_Type_Update.php" method="post"><input type="hidden" name="TID" value=""/><input type="submit" value="Update"/></form>
 
                    
         
