@@ -14,6 +14,7 @@
  */
 interface IDAO {
     
+    public function getAllRows();
     /**
     * A method to check a single row of data exist based on the primary key.
     *
