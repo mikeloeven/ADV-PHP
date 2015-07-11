@@ -63,5 +63,5 @@
 [559fa38b9ff36]	[exception]	[07-10-2015 12:50pm]	SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
 [559fa38ba5527]	[exception]	[07-10-2015 12:50pm]	SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
 [559fa38baa348]	[exception]	[07-10-2015 12:50pm]	SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
-[559fa5151007c]	[exception]	[07-10-2015 12:57pm]	Controller for page "phone" failed
-[559fa520c4dbb]	[exception]	[07-10-2015 12:57pm]	Controller for page "phone" failed
+[559fa50ce8784]	[exception]	[07-10-2015 12:57pm]	Controller for page "phone" failed
+[559fa66e3784a]	[exception]	[07-10-2015 1:03pm]	Controller for page "email" failed
