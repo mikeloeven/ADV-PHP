@@ -65,3 +65,20 @@
 [559fa38baa348]	[exception]	[07-10-2015 12:50pm]	SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
 [559fa50ce8784]	[exception]	[07-10-2015 12:57pm]	Controller for page "phone" failed
 [559fa66e3784a]	[exception]	[07-10-2015 1:03pm]	Controller for page "email" failed
+[55a51338c178f]	[exception]	[07-14-2015 3:48pm]	Controller for page "email" failed
+[55a90152d4f54]	[exception]	[07-17-2015 3:21pm]	Scope variable view not found or set.
+[55a9017c2c19f]	[exception]	[07-17-2015 3:22pm]	Scope variable view not found or set.
+[55a901e30c55b]	[exception]	[07-17-2015 3:23pm]	Scope variable view not found or set.
+[55a9021515941]	[exception]	[07-17-2015 3:24pm]	Scope variable view not found or set.
+[55a9021fc5826]	[exception]	[07-17-2015 3:24pm]	Scope variable view not found or set.
+[55a9023d4d8f6]	[exception]	[07-17-2015 3:25pm]	Controller for page "phone" failed
+[55a9023fbf1eb]	[exception]	[07-17-2015 3:25pm]	Scope variable view not found or set.
+[55a902c5005a6]	[exception]	[07-17-2015 3:27pm]	Scope variable view not found or set.
+[55a9038cc3482]	[exception]	[07-17-2015 3:30pm]	Scope variable view not found or set.
+[55a903cbb92cb]	[exception]	[07-17-2015 3:31pm]	Scope variable view not found or set.
+[55a9042d1f42c]	[exception]	[07-17-2015 3:33pm]	Scope variable view not found or set.
+[55a9049543a09]	[exception]	[07-17-2015 3:35pm]	Scope variable view not found or set.
+[55a904f457058]	[exception]	[07-17-2015 3:36pm]	Scope variable view not found or set.
+[55a904fb65093]	[exception]	[07-17-2015 3:36pm]	Scope variable view not found or set.
+[55a9088fd33ed]	[exception]	[07-17-2015 3:52pm]	Controller for page "emailtype" failed
+[55a90a24cc8c5]	[exception]	[07-17-2015 3:59pm]	Controller for page "emailtype" failed

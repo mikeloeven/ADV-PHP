@@ -191,21 +191,31 @@ use Exception;
                 
         $_phoneTypeService = new PhoneTypeService($_phoneTypeDAO, $_validator, $_phoneTypemodel );
         
-        $_emailtypeservice = new EmailtypeService();
+        $_emailTypeModel = new EmailTypeModel();
+        
+        $_emailTypeDAO = new EmailTypeDAO($_pdo->getDB(), $_emailTypeModel, $_log);
+        
+        $_emailTypeService = new EmailTypeService($_emailTypeDAO, $_validator, $_emailTypeModel);
+        
+        $_emailModel;
+        
+        $_emailDAO;
+        
+        $_emailService;
         
         //http://php.net/manual/en/functions.anonymous.php
 
         $index->addDIController('index', function() {            
             return new \APP\controller\IndexController();
-        })
-        ->addDIController('phonetype', function() use ($_phoneTypeService ) { 
+        });
+        $index->addDIController('phonetype', function() use ($_phoneTypeService ) { 
             return new \APP\controller\PhonetypeController($_phoneTypeService);
-        })
-        ->addDIController('emailtype', function() use ($_emailtypeservice ) { 
-            return new \APP\controller\EmailtypeController($_emailtypeservice);
-        })
+        });
+        $index->addDIController('emailtype', function() use ($_emailTypeService ) { 
+            return new \APP\controller\EmailTypeController($_emailTypeService);
+        });
         
-        ;
+        
         // run application!
         $index->run($_scope);
     }

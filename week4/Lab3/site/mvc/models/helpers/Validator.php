@@ -26,6 +26,20 @@ class Validator implements IService {
     }
     
     /**
+     * Method Checks to see if Email Type is a string and not null
+     * 
+     * @param {string} $emailType
+     * 
+     * @return boolean
+     */
+    
+    public function emailTypeIsValid($emailType)
+    {
+        return ( is_string($emailType) && !empty($emailType));
+    }
+    
+    
+    /**
      * A method to check if a phone number is valid.
      *
      * @param {String} [$phone] - must be a valid phone number

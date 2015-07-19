@@ -2,9 +2,17 @@
 /**
  * Description of PhoneTypeDAO
  *
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
  * @author User
  */
-
 namespace App\models\services;
 
 use App\models\interfaces\IDAO;
@@ -20,7 +28,7 @@ class PhoneTypeDAO extends BaseDAO implements IDAO {
         $this->setLog($log);
     }
           
-    public function idExisit($id) {
+    public function idExist($id) {
         
         $db = $this->getDB();
         $stmt = $db->prepare("SELECT * FROM phonetype WHERE phonetypeid = :phonetypeid");
@@ -56,7 +64,7 @@ class PhoneTypeDAO extends BaseDAO implements IDAO {
                           ":active" => $model->getActive()
                     );
                          
-         if ( !$this->idExisit($model->getPhonetypeid()) ) {
+         if ( !$this->idExist($model->getPhonetypeid()) ) {
              
              $stmt = $db->prepare("INSERT INTO phonetype SET phonetype = :phonetype, active = :active");
              
@@ -80,7 +88,7 @@ class PhoneTypeDAO extends BaseDAO implements IDAO {
                     );
          
                 
-         if ( $this->idExisit($model->getPhonetypeid()) ) {
+         if ( $this->idExist($model->getPhonetypeid()) ) {
             
              $stmt = $db->prepare("UPDATE phonetype SET phonetype = :phonetype, active = :active WHERE phonetypeid = :phonetypeid");
          
@@ -106,9 +114,9 @@ class PhoneTypeDAO extends BaseDAO implements IDAO {
         } else {
             $error = implode(",", $db->errorInfo());
             $this->getLog()->logError($error);
-        }
-         
-         return false;
+            var_dump($error);
+        }        
+        return false;
     }
     
     public function getAllRows() {
