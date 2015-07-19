@@ -32,11 +32,9 @@ class EmailTypeController extends BaseController implements IController{
         
         if ($scope->util->isPostRequest())
         {
-            var_dump($scope->util->getAction());
             switch($scope->util->getAction())
             {
                 case "create":
-                    echo Pass;
                     $this->data['model']->map($scope->util->getPostValues());
                     $this->data['errors'] = $this->service->validate($this->data['model']);
                     $this->data['saved'] = $this->service->create($this->data['model']);

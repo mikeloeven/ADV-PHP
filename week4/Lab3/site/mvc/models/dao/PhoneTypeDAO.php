@@ -114,7 +114,6 @@ class PhoneTypeDAO extends BaseDAO implements IDAO {
         } else {
             $error = implode(",", $db->errorInfo());
             $this->getLog()->logError($error);
-            var_dump($error);
         }        
         return false;
     }

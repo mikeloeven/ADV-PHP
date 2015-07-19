@@ -68,11 +68,9 @@ class EmailTypeDAO extends BaseDAO implements IDAO
             
             if ($stmt->execute($binds) && $stmt->rowCount()>0)
             {
-                echo "Pass";
                 return true;
             }
         }
-        echo "Fail";
         return false;
     }
     
@@ -112,7 +110,6 @@ class EmailTypeDAO extends BaseDAO implements IDAO
         {
             $error = implode(",", $db->errorInfo());
             $this->getLog()->logError($error);
-            var_dump($error);
         }         
         return false;
     }

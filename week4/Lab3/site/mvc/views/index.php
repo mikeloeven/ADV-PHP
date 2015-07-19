@@ -9,7 +9,6 @@
         <?php
         // put your code here
         
-        var_dump($scope->view);
         
         
         ?>
