@@ -1,126 +1,116 @@
-<?php namespace lab2; use PDO;
+<?php
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+namespace App\models\services;
 
-class EmailService
+use App\models\interfaces\IDAO;
+use App\models\interfaces\IService;
+use App\models\interfaces\IModel;
+
+class EmailService implements IService
 {
+    protected $DAO;
+    protected $validator;
+    protected $model;
     
-    private $_errors = array();
-    private $_Util;
-    private $_DB;
-    private $_Validator;
-    private $_EmailDAO;
-    private $_EmailModel;
+    function getDAO()
+    {
+        return $this->DAO;
+    }
+    
+    function setDAO($dao)
+    {
+        $this->DAO = $dao;
+    }
+    
+    function getValidator()
+    {
+        return $this->validator;
+    }
+    
+    function setValidator($validator)
+    {
+        $this->validator = $validator;
+    }
+    
+    function getModel()
+    {
+        return $this->model;
+    }
+    
+    function setModel($model)
+    {
+        $this->model = $model;
+    }    
 
-    public function __construct($db, $util, $validator, $emailDAO, $emailModel)
+    public function __construct(IDAO $emailDAO, IService $validator, IModel $model)
     {
-        $this->_DB = $db;
-        $this->_Util = $util;
-        $this->_Validator = $validator;
-        $this->_EmailDAO = $emailDAO;
-        $this->_EmailModel = $emailModel;
+        $this->Validator = $validator;
+        $this->DAO = $emailDAO;
+        $this->model = $model;
     }
     
-    public function saveForm()
+    public function getAllRows($limit = "", $offset = "") 
     {
-        if(!$this->_Util->isPostRequest())
-        {
-            return false;
-        }
-        
-        $this->validateForm();
-        
-        if($this->hasErrors())
-        {
-            $this->displayErrors();
-        }
-        else 
-        {
-            if($this->_EmailDAO->save($this->_EmailModel))
-            {
-                return true;
-            }
-            else 
-            {
-                return false;
-            }
-        }
+        return $this->getDAO()->getAllRows($limit, $offset);
     }
     
-    public function validateForm() 
+    public function read($id) 
     {
-        if ($this->_Util->isPostRequest())
+        return $this->getDAO()->read($id);
+    }
+    
+    public function delete($id) 
+    {
+        return $this->getDAO()->delete($id);
+    }
+    
+    public function create(IModel $model) 
+    {
+        
+        if ( count($this->validate($model)) === 0 ) {
+            return $this->getDAO()->create($model);
+        }
+        return false;
+    }
+    
+    public function update(IModel $model) 
+    {
+        
+        if ( count($this->validate($model)) === 0 ) {
+            return $this->getDAO()->update($model);
+        }
+        return false;
+    }
+    
+    public function validate( IModel $model ) {
+        $errors = array();
+        if ( !$this->getValidator()->emailIsValid($model->getEmail()) ) 
         {
-            $this->_errors = array();
-            if (!$this->_Validator->emailIsValid($this->_EmailModel->getEmail()))
-            {
-                $this->_errors[] = 'Email Is Invalid';
-            }
+            $errors[] = 'Email Type is Invalid';
+        }
+               
+        if ( !$this->getValidator()->activeIsValid($model->getActive()) ) 
+        {
+            $errors[] = 'Email active is Invalid';
+        }
+        
+        if ( !$this->getValidator()->emailTypeIsValid($model->getEmailType()) )
+        {
+            $errors[] = 'Email Type is Invalid';
+        }
+        
+        return $errors;
 
-        }
     }
     
-    public function displayErrors()
+    public function getNewEmailModel()
     {
-        foreach ($this->_errors as $value)
-        {
-            echo '<p>',$value,'</p>';
-        }
+        return clone $this->getModel();
     }
-    
-    public function hasErrors()
-    {
-        return (count($this->_errors)>0);
-    }
-    
-    public function displayEmails()
-    {
-        $stmt = $this->_DB->prepare("SELECT * FROM email");
-        
-        if ($stmt->execute() && $stmt->rowCount()>0)
-        {
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
-            foreach ($results as $value)
-            {
-                echo '<p>', $value['email'], '</p>';
-            }
-        }
-            else 
-            {
-                echo '<p>No Data</p>';
-            }
-        
-    }
-    
-    public function displayEmailActions()
-    {
-        $Emails = $this->_EmailDAO->getAllRows();
-        
-        if (count($emails)<0)
-        {
-            echo '<p>No Data</p>';
-        }
-        else 
-        {
-            echo '<table border="1" cellpadding = "5"><tr><th>Email ID</th><th>Email</th><th>Email Type</th><th>Active</th><th>Last Updated</th></tr>;';
-            foreach ($emails as $value)
-            {
-                echo '<tr>';
-                echo '<td>', $value->getEmailId(),'</td>';
-                echo '<td>', $value->getEmail(),'</td>';
-                echo '<td>', $value->getEmailType(),'</td>';
-                echo '<td>', $value->getActive(),'</td>';
-                echo '<tr>';
-            }
-            echo '</table>';
-        }
-    }
-    
-    
     
     
     

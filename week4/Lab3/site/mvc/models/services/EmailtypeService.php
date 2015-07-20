@@ -25,7 +25,7 @@ class EmailTypeService implements IService {
      function setValidator($validator) {
          $this->validator = $validator;
      }
-
+     
      function getModel() {
          return $this->model;
      }

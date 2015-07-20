@@ -9,32 +9,28 @@
         
         <?php
         
-            if ( $scope->util->isPostRequest() ) {
-             
-             if ( isset($scope->view['errors']) ) {
-                print_r($scope->view['errors']);
+             if ( isset($scope->view['updated']) && $scope->view['updated'] ) 
+             {
+                  echo 'Email Type Updated';
              }
              
-             if ( isset($scope->view['saved']) && $scope->view['saved'] ) {
-                  echo 'Email Type Added';
+             else
+             {
+                  echo 'Email Type Not Updated';
              }
              
-             if ( isset($scope->view['deleted']) && $scope->view['deleted'] ) {
-                  echo 'Email Type deleted';
-             }
-             
-         }
          $emailType = $scope->view['model']->getEmailtype();
          $active = $scope->view['model']->getActive();
-         
+         $emailTypeid = $scope->view['model']->getEmailtypeid();
         ?>
         
         <h3>Add Email Type</h3>
         <form action="#" method="post">
             <label>Phone Type:</label> 
+            <input type="hidden"  name="emailtypeid" value="<?php echo $emailTypeid; ?>" />
             <input type="text" name="emailtype" value="<?php echo $emailType; ?>" placeholder="" />
             <input type="number" max="1" min="0" name="Active" value="<?php echo $active; ?>" />
-            <input type="hidden" name="action" value="create" />
+            <input type="hidden" name="action" value="update" />
             <input type="submit" value="Submit" />
         </form>
         
