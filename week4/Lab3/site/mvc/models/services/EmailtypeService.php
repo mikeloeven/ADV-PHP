@@ -88,7 +88,7 @@ class EmailTypeService implements IService {
     
     public function validate( IModel $model ) {
         $errors = array();
-        if ( !$this->getValidator()->emailTypeIsValid($model->getEmailtype()) ) {
+        if ( !$this->getValidator()->emailTypeIsValid($model->getEmailType()) ) {
             $errors[] = 'Email Type is invalid';
         }
                

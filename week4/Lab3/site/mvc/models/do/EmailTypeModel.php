@@ -21,11 +21,11 @@ class EmailTypeModel extends BaseModel {
     private $emailtype;
     private $active;
     
-    function getEmailtypeid() {
+    function getEmailTypeId() {
         return $this->emailtypeid;
     }
 
-    function getEmailtype() {
+    function getEmailType() {
         return $this->emailtype;
     }
 

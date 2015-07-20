@@ -1,5 +1,4 @@
-<?php namespace lab2; 
-use PDO;
+<?php
 
 /* 
  * To change this license header, choose License Headers in Project Properties.
@@ -7,23 +6,21 @@ use PDO;
  * and open the template in the editor.
  */
 
-class EmailDAO implements IDAO{
+namespace APP\models\services;
+
+use App\models\interfaces\IDAO;
+use App\models\interfaces\IModel;
+use App\models\interfaces\ILogging;
+use \PDO;
+
+class EmailDAO extends BaseDAO implements IDAO
+{
     
-    private $DB = null;
-    
-    public function __construct( PDO $db ) 
+    public function __construct(PDO $db, IModel $model, ILogging $log) 
     {
         $this->setDB($db);
-    }
-    
-    private function setDB( PDO $db )
-    {
-        $this->DB = $db;
-    }
-    
-    private function getDB()
-    {
-        return $this->DB;
+        $this->setModel($model);
+        $this->setLog($log);
     }
     
     public function idExist($id)
@@ -38,7 +35,7 @@ class EmailDAO implements IDAO{
         return false;
     }
     
-    public function emailExist($email, EmailModel $model)
+    public function emailExist($email)
     {
         $db = $this->getDB();
         $stmt = $db->prepare("SELECT emailid FROM email WHERE email= :email");
@@ -46,27 +43,39 @@ class EmailDAO implements IDAO{
         {
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             $value = $result[0];
-            $model->setEmailId($value['emailid']);
+            $this->$setModel->setEmailId($value['emailid']);
         }
         return null;
-    }
+    }   
     
-    
-    
-    public function getById($id)
+    public function read($id)
     {
-        $model = new emailModel();
-        $db = $this->getDB();
-        
+        $model = clone $this->getModel();
+        $db = $this->getDB();        
         $stmt = $db->prepare("SELECT email.emailid, email.email, emailtype.emailtypeid, emailtype.emailtype, emailtype.active, email.logged, email.lastupdated, email.active FROM email LEFT JOIN emailtype on email.emailtypeid = emailtype.emailtypeid "
                 ."WHERE email.emailid = :emailid");
         if ( $stmt->execute(array(':emailid' => $id)) && $stmt->rowCount() > 0)
         {
             $results = $stmt->fetch(PDO::FETCH_ASSOC);
-            $model->map($results);
+            $model->reset()->map($results);
         }
         
         return $model;
+        
+    }
+    
+    public function create(IModel $model)
+    {
+        $db = $this->getDB();
+        $binds = array
+        (
+            ":email" => $model->getEmail(),
+            ":active" => $model->getActive(),
+            ":emailtypeid" => $model->getEmailTypeId(),
+        );
+        
+
+        
         
     }
     
@@ -77,7 +86,7 @@ class EmailDAO implements IDAO{
         (
             ":email" => $model->getEmail(),
             ":active" => $model->getActive(),
-            ":emailtypeid" => $model->getEmailTypeID(),
+            ":emailtypeid" => $model->getEmailTypeId(),
         );
         
         if( $this->idExist($model->getEmailid()))

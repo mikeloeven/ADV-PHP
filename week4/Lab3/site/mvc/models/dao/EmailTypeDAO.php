@@ -61,8 +61,8 @@ class EmailTypeDAO extends BaseDAO implements IDAO
         public function create(IModel $model) 
     {
         $db = $this->getDB();
-        $binds = array(":emailtype" => $model->getEmailtype(),":active" => $model->getActive());
-        if (!$this->idExist($model->getEmailtypeId()))
+        $binds = array(":emailtype" => $model->getEmailType(),":active" => $model->getActive());
+        if (!$this->idExist($model->getEmailTypeId()))
         {
             $stmt = $db->prepare("INSERT INTO emailtype SET emailtype = :emailtype, active = :active");
             
@@ -78,9 +78,9 @@ class EmailTypeDAO extends BaseDAO implements IDAO
     {
         
         $db = $this->getDB();         
-        $binds = array(":emailtype" => $model->getEmailtype(),":active" => $model->getActive(),":emailtypeid" => $model->getEmailtypeid());        
+        $binds = array(":emailtype" => $model->getEmailType(),":active" => $model->getActive(),":emailtypeid" => $model->getEmailTypeId());        
                 
-         if ( $this->idExist($model->getEmailtypeid()) ) {            
+         if ( $this->idExist($model->getEmailTypeId()) ) {            
              $stmt = $db->prepare("UPDATE emailtype SET emailtype = :emailtype, active = :active WHERE emailtypeid = :emailtypeid");
              
              if ( $stmt->execute($binds) && $stmt->rowCount() > 0 )

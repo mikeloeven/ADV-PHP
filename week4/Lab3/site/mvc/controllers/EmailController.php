@@ -59,7 +59,7 @@ class EmailTypeController extends BaseController implements IController{
             }
         }
         
-        $this->data['EmailTypes'] = $this->service->getAllRows();
+        $this->data['Email'] = $this->service->getAllRows();
         
         $scope->view = $this->data;
         return $this->view($viewPage,$scope);

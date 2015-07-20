@@ -197,11 +197,11 @@ use Exception;
         
         $_emailTypeService = new EmailTypeService($_emailTypeDAO, $_validator, $_emailTypeModel);
         
-        $_emailModel;
+        //$_emailModel = new EmailModel();
         
-        $_emailDAO;
+        //$_emailDAO = new EmailDAO($_pdo->getDB(), $_emailModel, $_log);
         
-        $_emailService;
+        //$_emailService = new EmailService($_emailDAO, $_validator, $_emailModel);
         
         //http://php.net/manual/en/functions.anonymous.php
 
