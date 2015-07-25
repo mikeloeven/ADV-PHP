@@ -134,7 +134,6 @@ class EmailDAO extends BaseDAO implements IDAO
             $values[":emailid"] = $model->getEmailid();
             $stmt = $db->prepare("UPDATE email set email = :email, emailtypeid = :emailtypeid, active = :active, lastupdated = now() WHERE emailid = :emailid");
         
-        echo "<prepare Statement>";
         if ($stmt->execute($values) && $stmt->rowCount() > 0 )
         {
             return true;

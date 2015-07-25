@@ -10,6 +10,10 @@
         if ( $scope->util->isPostRequest() ) {
              
              if ( isset($scope->view['errors']) ) {
+                 foreach($scope->view['errors'] as $value)
+                 {
+                     echo '<p>', $value ,'</p>';
+                 }
              }
              
              if ( isset($scope->view['saved']) && $scope->view['saved'] ) {
@@ -31,7 +35,7 @@
         
         <h3>Email</h3>
         <form action="#" method="post">
-            <label>Email:</label> 
+            <label>Add Email:</label> 
             <input type="text" name="email" value="<?php echo $email; ?>"/>
             <select name="emailtypeid">
             <?php                
@@ -65,11 +69,12 @@
             
             else
             {
-                echo '<table border="1" style="border-style:inset"<tr><th>Email</th><th>Email Type</th><th>Active</th><th>Updated</th><th>Logged</th></tr>';
+                echo '<table border="1" style="border-style:inset"<tr><th>EmailID</th><th>Email</th><th>Email Type</th><th>Active</th><th>Updated</th><th>Logged</th></tr>';
                 
                 foreach ($scope->view['Email'] as $value)
                 {
                     echo '<tr>';
+                    echo '<td>', $value->getEmailId(), '</td>';
                     echo '<td>', $value->getEmail(), '</td>';
                     echo '<td>', $value->getEmailType(),'</td>';
                     echo '<td>', $value->getActive() == 1 ? 'Yes' : 'No' ,'</td>';
@@ -79,9 +84,20 @@
                     echo '<td><form action="#" method="post"><input type="hidden"  name="emailid" value="',$value->getEmailId(),'" /><input type="hidden" name="action" value="delete" /><input type="submit" value="DELETE" /> </form></td>';
                     echo '</tr>' ;
                 }
+                
+                echo '</table>';
             }
         
         ?>
+        
+        <br/>
+        <br/>
+        <form action="#" method="post">
+            <label>EmailID:</label>
+            <input type="hidden" name="action" value="edit"/>
+            <input type="text" name="emailid"/>
+            <input type="submit" value="Edit"/>
+        </form>
         
         
     </body>

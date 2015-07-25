@@ -11,8 +11,11 @@
         
             if ( $scope->util->isPostRequest() ) {
              
-             if ( isset($scope->view['errors']) ) {
-                print_r($scope->view['errors']);
+             if ( !empty($scope->view['errors']) ) {
+                 foreach($scope->view['errors'] as $value)
+                 {
+                     echo '<p>', $value, '</p>';
+                 }
              }
              
              if ( isset($scope->view['saved']) && $scope->view['saved'] ) {

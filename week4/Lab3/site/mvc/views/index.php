@@ -5,17 +5,20 @@
         <title></title>
     </head>
     <body>
-        cool
         <?php
         // put your code here
         
         
         
         ?>
-        
-        <a href="emailtype">Email Type</a>
-        <a href="email">email</a>
-        <a href="phone">Phone</a>
-        <a href="phonetype">Phonetype</a>
+        <table border="1" style="border-style:inset">
+            <tr>
+                <th><a href="email">Email</a></th>
+            </tr>
+            <tr>
+                <th><a href="emailtype">Email Type</a></th>
+            </tr>
+
+        </table>
     </body>
 </html>

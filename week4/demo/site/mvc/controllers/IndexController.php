@@ -26,7 +26,6 @@ class IndexController extends BaseController implements IController {
 
     public function execute(IService $scope) {                  
         
-        $this->data["cool"] = 'testing';
         $scope->view = $this->data;
         return $this->view('index',$scope);
     }

@@ -185,12 +185,6 @@ use Exception;
         $_scope->util = new Util();
         $_validator = new Validator();
         
-        $_phoneTypemodel = new PhoneTypeModel();
-        
-        $_phoneTypeDAO = new PhoneTypeDAO($_pdo->getDB(), $_phoneTypemodel, $_log);
-                
-        $_phoneTypeService = new PhoneTypeService($_phoneTypeDAO, $_validator, $_phoneTypemodel );
-        
         $_emailTypeModel = new EmailTypeModel();
         
         $_emailTypeDAO = new EmailTypeDAO($_pdo->getDB(), $_emailTypeModel, $_log);
@@ -207,9 +201,6 @@ use Exception;
 
         $index->addDIController('index', function() {            
             return new \APP\controller\IndexController();
-        });
-        $index->addDIController('phonetype', function() use ($_phoneTypeService ) { 
-            return new \APP\controller\PhonetypeController($_phoneTypeService);
         });
         $index->addDIController('emailtype', function() use ($_emailTypeService ) { 
             return new \APP\controller\EmailTypeController($_emailTypeService);

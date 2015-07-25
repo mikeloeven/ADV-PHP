@@ -7,7 +7,7 @@
  */
 
 /**
- * Description of EmailTypeController
+ * Controller for Email Type
  *
  * @author Mikeloeven
  */

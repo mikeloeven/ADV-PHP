@@ -7,7 +7,7 @@
  */
 
 /**
- * Description of EmailTypeController
+ * Controller for Email
  *
  * @author Mikeloeven
  */
@@ -33,39 +33,32 @@ class EmailController extends BaseController implements IController{
         
         if ($scope->util->isPostRequest())
         {
+            
+          
             switch($scope->util->getAction())
             {
                 case "create":
                     
-                    echo 'Switch Passed <br /><br />';
-                    if ($this->data['model']->map($scope->util->getPostValues()))
-                    {
-                        echo 'Mapping Successfull <br/><br/>';
-                        
-                    }
-                    if ($this->data['errors'] = $this->service->validate($this->data['model']))
-                    {
-                        echo 'Data Validated Successfully <br/><br/>';
-                    }
-                    if ($this->data['saved'] = $this->service->create($this->data['model']))
-                    {
-                        echo 'Creation Success <br/><br/>';
-                    }
+                    $this->data['model']->map($scope->util->getPostValues());
+                    
+                    $this->data['errors'] = $this->service->validate($this->data['model']);             
+                    
+                    $this->data['saved'] = $this->service->create($this->data['model']);
+                    
                     break;
                 
                 case "update":
-                    if($this->data['model']->map($scope->util->getPostValues()))
-                    {
-                        echo "Map Success <br />";
-                    }
-    
-                    echo "Update Called";
-                    $this->data["updated"] = $this->service->update($this->data['model']);
                     
+                    $this->data['model']->map($scope->util->getPostValues());
+                    
+                    $this->data["updated"] = $this->service->update($this->data['model']);
+                 
                     $viewPage .= 'edit';
+                    
                     break;
                 
                 case "edit":
+                    
                     $viewPage .= 'edit';
                 $this->data['model'] = $this->service->read($scope->util->getPostParam('emailid'));
                     break;

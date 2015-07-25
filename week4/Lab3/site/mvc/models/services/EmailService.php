@@ -70,11 +70,8 @@ class EmailService implements IService
     
     public function create(IModel $model) 
     {
-        echo 'Service Function Create Called <br/><br/>';
-        print_r($this->validate($model));
         if ( count($this->validate($model)) === 0 ) 
         {
-            echo "Confirm Valid <br/> <br/>";
             return $this->getDAO()->create($model);
         }
         return false;
@@ -82,7 +79,6 @@ class EmailService implements IService
     
     public function update(IModel $model) 
     {
-        echo "Update Trigger <br />";
         if ( count($this->validate($model)) === 0 ) {
             return $this->getDAO()->update($model);
         }
@@ -91,21 +87,16 @@ class EmailService implements IService
     
     public function validate(IModel $model ) {
         $errors = array();
-        echo "Validate trigger <br />";
         if ( !$this->getValidator()->emailIsValid($model->getEmail())) 
         {
-            echo "type fail";
             $errors[] = 'Email is Invalid';
         }
                
         if ( !$this->getValidator()->activeIsValid($model->getActive()) ) 
         {
-            echo "active fail";
             $errors[] = 'Email active is Invalid';
         }
         
-        echo "Validate BLock Complete";
-        print_r($errors);
         return $errors;
 
     }
