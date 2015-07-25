@@ -33,7 +33,9 @@
             <input type="hidden" name="action" value="update" />
             <input type="submit" value="Submit" />
         </form>
-        
+        <form method ="link" action ="emailtype">
+            <input type="submit" value ="back"/>
+        </form>
         <br/>    
         <br/>
         <br/>

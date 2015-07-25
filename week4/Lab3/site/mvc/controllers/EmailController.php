@@ -17,51 +17,70 @@ namespace APP\controller;
 use App\models\interfaces\IController;
 use App\models\interfaces\IService;
 
-class EmailTypeController extends BaseController implements IController{
+class EmailController extends BaseController implements IController{
     
-    public function __construct(IService $EmailTypeService) 
+    public function __construct(IService $EmailTypeService, IService $EmailService) 
     {
-        $this->service = $EmailTypeService;
+        $this->service = $EmailService;
+        $this->typeservice = $EmailTypeService;
     }
     
     public function execute(IService $scope)
     {
-        $this->data['model'] = $this->service->getNewEmailTypeModel();
+        $this->data['model'] = $this->service->getNewEmailModel();
         $this->data['model']->reset();
-        $viewPage = 'emailtype';
+        $viewPage = 'email';
         
         if ($scope->util->isPostRequest())
         {
             switch($scope->util->getAction())
             {
                 case "create":
-                    $this->data['model']->map($scope->util->getPostValues());
-                    $this->data['errors'] = $this->service->validate($this->data['model']);
-                    $this->data['saved'] = $this->service->create($this->data['model']);
+                    
+                    echo 'Switch Passed <br /><br />';
+                    if ($this->data['model']->map($scope->util->getPostValues()))
+                    {
+                        echo 'Mapping Successfull <br/><br/>';
+                        
+                    }
+                    if ($this->data['errors'] = $this->service->validate($this->data['model']))
+                    {
+                        echo 'Data Validated Successfully <br/><br/>';
+                    }
+                    if ($this->data['saved'] = $this->service->create($this->data['model']))
+                    {
+                        echo 'Creation Success <br/><br/>';
+                    }
                     break;
                 
                 case "update":
-                    $this->data['model']->map($scope->util->getPostValues());
-                    $this->data["errors"] = $this->service->validate($this->data['model']);
+                    if($this->data['model']->map($scope->util->getPostValues()))
+                    {
+                        echo "Map Success <br />";
+                    }
+    
+                    echo "Update Called";
                     $this->data["updated"] = $this->service->update($this->data['model']);
+                    
                     $viewPage .= 'edit';
                     break;
                 
                 case "edit":
                     $viewPage .= 'edit';
-                $this->data['model'] = $this->service->read($scope->util->getPostParam('emailtypeid'));
+                $this->data['model'] = $this->service->read($scope->util->getPostParam('emailid'));
                     break;
                 
                 case "delete":
-                    $this->data["deleted"] = $this->service->delete($scope->util->getPostParam('emailtypeid'));
+                    $this->data["deleted"] = $this->service->delete($scope->util->getPostParam('emailid'));
                     break;
                 
             }
         }
         
         $this->data['Email'] = $this->service->getAllRows();
-        
+        $this->data['Types'] =$this->typeservice->getAllRows();
         $scope->view = $this->data;
+        
         return $this->view($viewPage,$scope);
     }
     

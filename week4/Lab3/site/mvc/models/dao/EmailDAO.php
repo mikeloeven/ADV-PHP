@@ -16,12 +16,24 @@ use \PDO;
 class EmailDAO extends BaseDAO implements IDAO
 {
     
+    /**
+     * Build Object
+     * @param PDO $db
+     * @param Interface IModel $model
+     * @param Interface ILogging $log
+     */
+    
     public function __construct(PDO $db, IModel $model, ILogging $log) 
     {
         $this->setDB($db);
         $this->setModel($model);
         $this->setLog($log);
     }
+    
+    /**
+     * Return true if email id exists in database
+     * @return boolen
+     */
     
     public function idExist($id)
     {
@@ -35,6 +47,11 @@ class EmailDAO extends BaseDAO implements IDAO
         return false;
     }
     
+    /**
+     * Return true if email exists in database
+     * @return boolen
+     */
+    
     public function emailExist($email)
     {
         $db = $this->getDB();
@@ -47,6 +64,11 @@ class EmailDAO extends BaseDAO implements IDAO
         }
         return null;
     }   
+    
+    /**
+     * Returns row from database By email ID
+     * @return array
+     */
     
     public function read($id)
     {
@@ -64,6 +86,11 @@ class EmailDAO extends BaseDAO implements IDAO
         
     }
     
+    /**
+     * Method to Create a New Row in the Database
+     * @return boolen
+     */
+    
     public function create(IModel $model)
     {
         $db = $this->getDB();
@@ -74,12 +101,25 @@ class EmailDAO extends BaseDAO implements IDAO
             ":emailtypeid" => $model->getEmailTypeId(),
         );
         
-
+        if (!$this->idExist($model->getEmailId()))
+        {
+            $stmt = $db->prepare("INSERT INTO email SET email = :email, emailtypeid = :emailtypeid, active = :active, logged = now(), lastupdated=now()");
+            
+            if ( $stmt->execute($binds) && $stmt->rowCount() > 0)
+            {
+                return true;
+            }
+        }
         
-        
+        return false;     
     }
     
-    public function save(IModel $model)
+    /**
+     * Method to Update Existing New Row in the Database 
+     * @return boolen
+     */
+    
+    public function update(IModel $model)
     {
         $db = $this->getDB();
         $values = array
@@ -89,24 +129,25 @@ class EmailDAO extends BaseDAO implements IDAO
             ":emailtypeid" => $model->getEmailTypeId(),
         );
         
-        if( $this->idExist($model->getEmailid()))
+        if( $this->idExist($model->getEmailId()))
         {
             $values[":emailid"] = $model->getEmailid();
             $stmt = $db->prepare("UPDATE email set email = :email, emailtypeid = :emailtypeid, active = :active, lastupdated = now() WHERE emailid = :emailid");
-        }
-            
-        else
-        {
-            $stmt = $db->prepare("INSERT INTO email SET email = :email, emailtypeid = :emailtypeid, active = :active, logged = now(), lastupdated = now()");
-        }
         
+        echo "<prepare Statement>";
         if ($stmt->execute($values) && $stmt->rowCount() > 0 )
         {
             return true;
         }
+        }
         
         return false;
     }
+    
+    /**
+     * Method to Delete a Row from the Database
+     * @return boolen
+     */
     
     public function delete($id)
     {
@@ -121,6 +162,10 @@ class EmailDAO extends BaseDAO implements IDAO
         return false;
     }
     
+    /**
+     * Method to Return All Rows
+     * @return Array
+     */
     
     public function getAllRows()
     {
@@ -146,6 +191,7 @@ class EmailDAO extends BaseDAO implements IDAO
         $stmt->closeCursor();
         return $values;
     }
-    
+
+
 }
 

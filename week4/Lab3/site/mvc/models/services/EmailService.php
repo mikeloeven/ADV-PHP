@@ -48,7 +48,7 @@ class EmailService implements IService
 
     public function __construct(IDAO $emailDAO, IService $validator, IModel $model)
     {
-        $this->Validator = $validator;
+        $this->validator = $validator;
         $this->DAO = $emailDAO;
         $this->model = $model;
     }
@@ -70,8 +70,11 @@ class EmailService implements IService
     
     public function create(IModel $model) 
     {
-        
-        if ( count($this->validate($model)) === 0 ) {
+        echo 'Service Function Create Called <br/><br/>';
+        print_r($this->validate($model));
+        if ( count($this->validate($model)) === 0 ) 
+        {
+            echo "Confirm Valid <br/> <br/>";
             return $this->getDAO()->create($model);
         }
         return false;
@@ -79,30 +82,30 @@ class EmailService implements IService
     
     public function update(IModel $model) 
     {
-        
+        echo "Update Trigger <br />";
         if ( count($this->validate($model)) === 0 ) {
             return $this->getDAO()->update($model);
         }
         return false;
     }
     
-    public function validate( IModel $model ) {
+    public function validate(IModel $model ) {
         $errors = array();
-        if ( !$this->getValidator()->emailIsValid($model->getEmail()) ) 
+        echo "Validate trigger <br />";
+        if ( !$this->getValidator()->emailIsValid($model->getEmail())) 
         {
-            $errors[] = 'Email Type is Invalid';
+            echo "type fail";
+            $errors[] = 'Email is Invalid';
         }
                
         if ( !$this->getValidator()->activeIsValid($model->getActive()) ) 
         {
+            echo "active fail";
             $errors[] = 'Email active is Invalid';
         }
         
-        if ( !$this->getValidator()->emailTypeIsValid($model->getEmailType()) )
-        {
-            $errors[] = 'Email Type is Invalid';
-        }
-        
+        echo "Validate BLock Complete";
+        print_r($errors);
         return $errors;
 
     }

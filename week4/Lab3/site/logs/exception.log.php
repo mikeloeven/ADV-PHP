@@ -82,3 +82,12 @@
 [55a904fb65093]	[exception]	[07-17-2015 3:36pm]	Scope variable view not found or set.
 [55a9088fd33ed]	[exception]	[07-17-2015 3:52pm]	Controller for page "emailtype" failed
 [55a90a24cc8c5]	[exception]	[07-17-2015 3:59pm]	Controller for page "emailtype" failed
+[55ae754cb9ac9]	[exception]	[07-21-2015 6:37pm]	Controller for page "email" failed
+[55ae900fa0eb3]	[exception]	[07-21-2015 8:31pm]	Scope variable view not found or set.
+[55ae90d8e1fc3]	[exception]	[07-21-2015 8:35pm]	Scope variable view not found or set.
+[55ae91d7242d0]	[exception]	[07-21-2015 8:39pm]	Scope variable view not found or set.
+[55ae922a45903]	[exception]	[07-21-2015 8:40pm]	Scope variable view not found or set.
+[55ae929e78fda]	[exception]	[07-21-2015 8:42pm]	Scope variable view not found or set.
+[55ae92c537201]	[exception]	[07-21-2015 8:43pm]	Controller for page "emailt" failed
+[55ae930503c52]	[exception]	[07-21-2015 8:44pm]	Scope variable view not found or set.
+[55b163ef74a59]	[exception]	[07-24-2015 12:00am]	Scope variable view not found or set.
