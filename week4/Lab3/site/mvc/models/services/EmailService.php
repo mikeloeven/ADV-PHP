@@ -48,14 +48,19 @@ class EmailService implements IService
 
     public function __construct(IDAO $emailDAO, IService $validator, IModel $model)
     {
-        $this->validator = $validator;
-        $this->DAO = $emailDAO;
-        $this->model = $model;
+        $this->setValidator($validator);
+        $this->setDAO($emailDAO);
+        $this->setModel($model);
     }
     
     public function getAllRows($limit = "", $offset = "") 
     {
         return $this->getDAO()->getAllRows($limit, $offset);
+    }
+    
+    public function idExist($id)
+    {
+        return $this->getDAO()->idExist($id);
     }
     
     public function read($id) 
