@@ -3,7 +3,7 @@
 /**
  * Data Object Model for Email Table
  */
-namespace App\models\services;
+namespace API\models\services;
 
 class EmailModel extends BaseModel
 {

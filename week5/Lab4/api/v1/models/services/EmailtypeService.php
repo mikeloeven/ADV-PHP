@@ -71,7 +71,6 @@ class EmailTypeService implements IService {
     }
     
     public function create(IModel $model) {
-        
         if ( count($this->validate($model)) === 0 ) {
             return $this->getDAO()->create($model);
         }

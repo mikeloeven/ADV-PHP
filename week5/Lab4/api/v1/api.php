@@ -57,15 +57,17 @@ final class Index {
     $_phoneTypemodel = new PhoneTypeModel();
     $_phoneModel = new PhoneModel();
     $_emailTypeModel = new EmailTypeModel();
+    $_emailModel = new EmailModel();
 
     $_phoneTypeDAO = new PhoneTypeDAO($_pdo->getDB(), $_phoneTypemodel, $_log);
     $_phoneDAO = new PhoneDAO($_pdo->getDB(), $_phoneModel, $_log);
     $_emailTypeDAO = new EmailTypeDAO($_pdo->getDB(), $_emailTypeModel, $_log);
-
+    $_emailDAO = new EmailDAO($_pdo->getDB(), $_emailModel, $_log);
+    
     $_phoneTypeService = new PhoneTypeService($_phoneTypeDAO, $_validator, $_phoneTypemodel );
     $_phoneService = new PhoneService($_phoneDAO, $_phoneTypeService, $_validator, $_phoneModel );        
     $_emailTypeService = new EmailTypeService($_emailTypeDAO, $_validator, $_emailTypeModel);
-   
+    $_emailService = new EmailService($_emailDAO, $_validator, $_emailModel);
     
      
     /*
@@ -88,6 +90,10 @@ final class Index {
     ->addDIResourceRequest('emailtypes', function() use ($_emailTypeService)
     {
         return new EmailTypeRequest($_emailTypeService);
+    })
+    ->addDIResourceRequest('email', function() use ($_emailService)
+    {
+       return new EmailRequest($_emailService);  
     })
     
     ;

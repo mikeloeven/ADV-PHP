@@ -7,48 +7,50 @@
  */
 
 /**
- * Description of newPHPClass
+ * Description of EmailRequest
  *
  * @author Mikeloeven
  */
+
 namespace API\models\services;
 
 use API\models\interfaces\IRequest;
 use API\models\interfaces\IService;
 use API\models\interfaces\IModel;
 
-
-class EmailTypeRequest implements IRequest
+class EmailRequest implements IRequest
 {
-    protected $service;    
     
-    public function __construct(IService $service) 
+    protected $service;
+    
+    public function __construct(IService $service)
     {
-        $this->service = $service;
+        $this->service = $service;        
     }
     
-    /**
-     * Returns a Dataset As Get Request from Email Type;
+     /**
+     * Returns a Dataset As Get Request from Email;
      * @param IModel $model
      */
+    
     public function GET(IModel $model)
     {
         $id = intval($model->getId());
         
-        if ( $id > 0)
+        if ($id >0)
         {
             if ($this->service->idExist($model->getId()))
             {
-                return $this->service->read($model->getId())->getAllProperties();
+               return $this->service->read($model->getId())->getAllProperties(); 
             }
             else
             {
-                throw new NoContentRequesTException($id . 'Email Type Not Found');
+                throw new NoContentRequestException($id . 'Email Not Found');
             }
         }
         
-        $data = $this->service->getAllRows();
-        $values = array();
+        $data =$this->service->getAllRows();
+        $values  = array();
         
         foreach($data as $value)
         {
@@ -56,37 +58,36 @@ class EmailTypeRequest implements IRequest
         }
         
         return $values;
-        
-        
     }
-    
     
     /**
      * Parses and Uploads POST Requests from API
      * @param IModel $model
      */
-    public function POST(IModel $model)
+    public function POST (IModel $model)
     {
         
-        $emailTypeModel = $this->service->getNewEmailTypeModel();
+        $emailModel = $this->service->getNewEmailModel();
         print_r($model->getRequestData());
-        $emailTypeModel->map($model->getRequestData());
+        $emailModel->map($model->getRequestData());
         
-        if ($this->service->create($emailTypeModel))
+        if ($this->service->create($emailModel))
         {
-            throw new ContentCreatedException('Email Type Created');
+            throw new ContentCreatedException('Email Created');
         }
         
-        $errors = $this->service->validate($emailTypeModel);
+        $errors = $this->service->validate($emailModel);
         
-        if (count($errors) > 0)
+        if(count($errors) > 0)
         {
             print_r($errors);
-            throw new ValidationException($errors, 'Email Type Not Created ');
+            throw new ValidationException($errors, 'Email Not Created Validation Failed');
+            
         }
         
         print_r($errors);
-        throw new ConflictRequestException("Email Type Not Created");
+        throw new ConflictRequestException("Email Not Created Conflict");
+    
         
     }
     
@@ -99,32 +100,34 @@ class EmailTypeRequest implements IRequest
     {
         $id = intval($model->getId());
         
-        $emailTypeModel = $this->service->getNewEmailTypeModel();
-        $emailTypeModel->map($model->getRequestData());
-        $emailTypeModel->setEmailTypeId($id);
+        $emailModel = $this->service->getNewEmailModel();
+        $emailModel->map($model->getRequestData());
+        $emailModel->setEmailTypeId($id);
         
-        if (!$this->service->idExist($id))
+        if(!$this->service->idExist($id))
         {
-            throw new NoContentRequestException($id, "Email Type Does Not Exist");
+            throw new NoContentRequestException($id, "Email Does Not Exist");
         }
         
-        if ($this->service->update($emailTypeModel))
+        if($this->service->update($emailModel))
         {
-            throw new ContentCreatedException("Email Type Updated");
+            throw new ContentCreatedException("Email Updated");
         }
+        
         else
         {
-            throw new ConflictRequestException('Email Type Not Updated');
+            throw new ConflictRequestException("Email Not Updated Unknown Conflict");
         }
-            
+        
     }
     
     /**
      * Processes Delete Requests
      * @param IModel $model
      */
+    
     public function DELETE(IModel $model)
-    {
+    {        
         $id = intval($model->getId());
         
         if ($this->service->delete($id))
@@ -132,9 +135,14 @@ class EmailTypeRequest implements IRequest
             return null;
         }
         
-        throw new ConflictRequestException($id . 'Email Type Not Deleted');
+        throw new ConflictRequestException($id . 'Email Not Deleted');
+        
     }
-    
-    
+
+
+
+
+
+
+//endofclass    
 }
- 
