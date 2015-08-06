@@ -22,10 +22,12 @@ class EmailRequest implements IRequest
 {
     
     protected $service;
+    protected $typeService;
     
-    public function __construct(IService $service)
+    public function __construct(IService $service, IService $typeService)
     {
-        $this->service = $service;        
+        $this->service = $service;
+        $this->typeService = $typeService;
     }
     
      /**
@@ -37,7 +39,7 @@ class EmailRequest implements IRequest
     {
         $id = intval($model->getId());
         
-        if ($id >0)
+        if ($id > 0)
         {
             if ($this->service->idExist($model->getId()))
             {
@@ -102,7 +104,7 @@ class EmailRequest implements IRequest
         
         $emailModel = $this->service->getNewEmailModel();
         $emailModel->map($model->getRequestData());
-        $emailModel->setEmailTypeId($id);
+        $emailModel->setEmailId($id);
         
         if(!$this->service->idExist($id))
         {

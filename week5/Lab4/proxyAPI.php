@@ -5,6 +5,7 @@ namespace API\models\services;
 include_once './api/v1/models/interfaces/IService.php';
 include_once './api/v1/models/helpers/RestProxy.php';
 
+
 $consumeAPI = new RestProxy();
 
 $key = 'test';

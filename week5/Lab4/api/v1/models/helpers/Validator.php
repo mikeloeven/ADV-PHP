@@ -33,7 +33,6 @@ class Validator implements IService {
     
     public function emailTypeIsValid($emailType)
     {
-        echo "Validation Block";
         return ( is_string($emailType) && !empty($emailType));
     }
     

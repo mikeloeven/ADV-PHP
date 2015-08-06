@@ -69,7 +69,7 @@
             
             else
             {
-                echo '<table border="1" style="border-style:inset"<tr><th>EmailID</th><th>Email</th><th>Email Type</th><th>Active</th><th>Updated</th><th>Logged</th></tr>';
+                echo '<table border="1" style="border-style:inset"><tr><th>EmailID</th><th>Email</th><th>Email Type</th><th>Active</th><th>Updated</th><th>Logged</th></tr>';
                 
                 foreach ($scope->view['Email'] as $value)
                 {

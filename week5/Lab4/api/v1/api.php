@@ -91,9 +91,9 @@ final class Index {
     {
         return new EmailTypeRequest($_emailTypeService);
     })
-    ->addDIResourceRequest('email', function() use ($_emailService)
+    ->addDIResourceRequest('email', function() use ($_emailService, $_emailTypeService)
     {
-       return new EmailRequest($_emailService);  
+       return new EmailRequest($_emailService, $_emailTypeService);  
     })
     
     ;

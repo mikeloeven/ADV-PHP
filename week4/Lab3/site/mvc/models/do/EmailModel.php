@@ -78,7 +78,7 @@ class EmailModel extends BaseModel
     
     function setEmailtypeActive($emailtypeactive)
     {
-        $this->emailtype = $emailtypeactive;
+        $this->emailtypeactive = $emailtypeactive;
     }   
     
     function setLogged($logged)

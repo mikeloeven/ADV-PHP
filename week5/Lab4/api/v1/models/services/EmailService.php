@@ -84,7 +84,9 @@ class EmailService implements IService
     
     public function update(IModel $model) 
     {
+        print_r($model->getAllProperties());
         if ( count($this->validate($model)) === 0 ) {
+            
             return $this->getDAO()->update($model);
         }
         return false;
@@ -101,7 +103,6 @@ class EmailService implements IService
         {
             $errors[] = 'Email active is Invalid';
         }
-        
         return $errors;
 
     }

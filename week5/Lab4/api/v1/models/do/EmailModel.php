@@ -16,69 +16,69 @@ class EmailModel extends BaseModel
     private $lastupdated;
     private $active;
     
-    function getEmailId()
+    function getemailid()
     {
         return $this->emailid;
     }
     
-    function getEmail()
+    function getemail()
     {
         return $this->email;
     }
     
-    function getEmailType()
+    function getemailtype()
     {
         return $this->emailtype;
     }
     
-    function getEmailTypeId()
+    function getemailtypeid()
     {
         return $this->emailtypeid;
     }
     
-    function getEmailTypeactive()
+    function getemailtypeactive()
     {
         return $this->emailtypeactive;
     }
     
-    function getLogged()
+    function getlogged()
     {
         return $this->logged;
     }
     
-    function getLastUpdated()
+    function getlastupdated()
     {
         return $this->lastupdated;
     }
     
-    function getActive()
+    function getactive()
     {
         return $this->active;
     }
     
-    function setEmailId($emailid)
+    function setemailid($emailid)
     {
         $this->emailid = $emailid;
     }
     
-    function setEmail($email)
+    function setemail($email)
     {
         $this->email = $email;
     }
     
-    function setEmailtypeid($emailtypeid)
+    function setemailtypeid($emailtypeid)
     {
         $this->emailtypeid = $emailtypeid;
     }
     
-    function setEmailtype($emailtype)
+    function setemailtype($emailtype)
     {
         $this->emailtype = $emailtype;
     }
     
-    function setEmailtypeActive($emailtypeactive)
+    function setemailtypeactive($emailtypeactive)
     {
-        $this->emailtype = $emailtypeactive;
+        $this->emailtypeactive = $emailtypeactive;
     }   
     
     function setLogged($logged)
