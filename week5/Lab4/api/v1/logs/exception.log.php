@@ -259,3 +259,10 @@
 [55ba71884bb68]	[exception]	[07-30-2015 8:48pm]	Email Not Updated Unknown Conflict
 [55ba7958a11e9]	[exception]	[07-30-2015 9:22pm]	29Email Not Found
 [55be5f9d3e012]	[exception]	[08-02-2015 8:21pm]	36Email Not Found
+[55c35ac33a92d]	[exception]	[08-06-2015 3:01pm]	Email Not Created Validation Failed
+[55c35acab0d79]	[exception]	[08-06-2015 3:02pm]	Email Not Created Validation Failed
+[55c35ae43b85d]	[exception]	[08-06-2015 3:02pm]	Email Not Created Validation Failed
+[55c35b406b70e]	[exception]	[08-06-2015 3:04pm]	Email Not Created Validation Failed
+[55c35b70104f2]	[exception]	[08-06-2015 3:04pm]	Email Not Created Validation Failed
+[55c35baa269ad]	[exception]	[08-06-2015 3:05pm]	Email Not Created Validation Failed
+[55c35bad99663]	[exception]	[08-06-2015 3:05pm]	Email Not Created Validation Failed
