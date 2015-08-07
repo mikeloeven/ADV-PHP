@@ -84,9 +84,7 @@ class EmailDAO extends BaseDAO implements IDAO
         if ( $stmt->execute(array(':emailid' => $id)) && $stmt->rowCount() > 0)
         {
             $results = $stmt->fetch(PDO::FETCH_ASSOC);
-            print_r($results);
             $model->reset()->map($results);
-            print_r($model->getAllProperties());
         }
         
         return $model;

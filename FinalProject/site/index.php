@@ -185,13 +185,14 @@ use Exception;
         $_scope->util = new Util();
         $_validator = new Validator();
         
+
         
         //http://php.net/manual/en/functions.anonymous.php
 
         $index->addDIController('index', function() {            
             return new \APP\controller\IndexController();
         });
-                
+        
         
         // run application!
         $index->run($_scope);

@@ -69,7 +69,6 @@ class EmailTypeRequest implements IRequest
     {
         
         $emailTypeModel = $this->service->getNewEmailTypeModel();
-        print_r($model->getRequestData());
         $emailTypeModel->map($model->getRequestData());
         
         if ($this->service->create($emailTypeModel))
@@ -81,11 +80,10 @@ class EmailTypeRequest implements IRequest
         
         if (count($errors) > 0)
         {
-            print_r($errors);
+           // print_r($errors);
             throw new ValidationException($errors, 'Email Type Not Created ');
         }
         
-        print_r($errors);
         throw new ConflictRequestException("Email Type Not Created");
         
     }

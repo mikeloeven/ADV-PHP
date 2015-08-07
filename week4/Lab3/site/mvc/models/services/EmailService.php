@@ -84,7 +84,6 @@ class EmailService implements IService
     
     public function update(IModel $model) 
     {
-        echo "<br/> I'm In <br/>";
         if ( count($this->validate($model)) === 0 ) {
             return $this->getDAO()->update($model);
         }

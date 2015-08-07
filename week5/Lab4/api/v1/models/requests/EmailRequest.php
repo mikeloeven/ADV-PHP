@@ -70,7 +70,6 @@ class EmailRequest implements IRequest
     {
         
         $emailModel = $this->service->getNewEmailModel();
-        print_r($model->getRequestData());
         $emailModel->map($model->getRequestData());
         
         if ($this->service->create($emailModel))
@@ -82,12 +81,11 @@ class EmailRequest implements IRequest
         
         if(count($errors) > 0)
         {
-            print_r($errors);
+            //print_r($errors);
             throw new ValidationException($errors, 'Email Not Created Validation Failed');
             
         }
         
-        print_r($errors);
         throw new ConflictRequestException("Email Not Created Conflict");
     
         

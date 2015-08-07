@@ -110,7 +110,10 @@ and open the template in the editor.
             xmlhttp.onreadystatechange = function(){
                 
                 if (xmlhttp.readyState === 4) {
-                    Response.innerHTML = xmlhttp.responseText;
+                    
+                    var msg = new Array();
+                    msg = JSON.parse(xmlhttp.responseText);
+                    Response.innerHTML=msg["message"];
                 }
                 else
                 {
